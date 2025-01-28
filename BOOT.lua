@@ -1,4 +1,6 @@
-local script = "https://raw.githubusercontent.com/adamgoose/atria-os/master/server.lua"
+local role = "server" -- change to "client" for clients
+local script = "https://raw.githubusercontent.com/adamgoose/atria-os/master/"..role..".lua"
+local install = false
 
 print("Load internet...")
 local internet = computer.getPCIDevices(classes.FINInternetCard)[1]
@@ -14,6 +16,11 @@ if code ~= 200 then
   print("ERROR! Failed to request installation script from '"..script.."'")
   computer.beep(0.2)
   return
+end
+
+if install then
+  computer.setEEPROM(data)
+  computer.reset()
 end
 
 print("Run installation...")
