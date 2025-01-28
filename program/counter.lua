@@ -3,7 +3,7 @@ function netBootReset()
 end
 
 local counter = 0
-while true
+while true do
   event.pull(1)
   counter = counter + 1
   print("Counter:", counter)
