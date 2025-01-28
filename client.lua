@@ -36,7 +36,7 @@ while program == nil do
     local e, _, s, p, cmd, arg1, arg2 = event.pull(30)
     if e == "NetworkMessage" and p == netBootPort and cmd == "setEEPROM" and arg1 == netBootProgram then
       print("Net-Boot: Got Code for Program '"..netBootProgram.."' from '"..s.."'")
-      program = load(code)
+      program = load(arg2)
     elseif e == nil then
       computer.log(3, "Net-Boot: Request Timeout reached!")
       break
