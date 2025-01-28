@@ -2,6 +2,18 @@
 local netBootPort = 69
 local programs = {"counter"}
 
+-- Identify Reset Button
+for _, id in ipairs(component.findComponent(classes.ModulePanel)) do
+  local panel = component.proxy(id)
+  for _, module in pairs(panel:getModules()) do
+    if module:getType().name == "MushroomPushbuttonModuleBig" then
+      print("Reset Button Identified")
+      module:setColor(0, 255, 0, 0)
+      event.listen(module)
+    end
+  end
+end
+
 -- Setup Storage
 local fs = filesystem
 if fs.initFileSystem("/dev") == false then
@@ -52,7 +64,7 @@ end
 
 -- Start Net-Boot
 while true do
-  local e, _, s, p, cmd, arg1 = event.pull()
+  local e, x, s, p, cmd, arg1 = event.pull()
   if e == "NetworkMessage" and p == netBootPort then
     if cmd == "getEEPROM" then
       print("Program request for '"..arg1.."' from '"..s.."'")
@@ -60,5 +72,11 @@ while true do
       net:send(s, netBootPort, "setEEPROM", arg1, file:read(99999))
       file:close()
     end
+  elseif e == "Trigger" then
+    print("Reset Button Pushed")
+    x:setColor(255, 0, 0)
+    computer.beep(0.2)
+    future.sleep(2):await()
+    computer.reset()
   end
 end
