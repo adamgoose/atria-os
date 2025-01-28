@@ -1,4 +1,4 @@
-- Configuration
+-- Configuration
 local netBootPort = 69
 local programs = {"counter"}
 
@@ -25,7 +25,7 @@ end
 
 -- Install Programs
 for _, program in pairs(programs) do
-  code, data = internet:request("https://raw.githubusercontent.com/adamgoose/satisfactory/master/program/"..program..".lua", "GET", ""):await()
+  code, data = internet:request("https://raw.githubusercontent.com/adamgoose/atria-os/master/program/"..program..".lua", "GET", ""):await()
   if code ~= 200 then
     error("Unable to download program "..program)
   end
