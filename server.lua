@@ -74,7 +74,7 @@ while true do
     end
   elseif e == "Trigger" then
     print("Reset Button Pushed")
-    x:setColor(255, 0, 0)
+    x:setColor(255, 0, 0, 0)
     computer.beep(0.2)
     future.sleep(2):await()
     computer.reset()
