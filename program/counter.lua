@@ -10,7 +10,7 @@ for _, id in ipairs(component.findComponent(classes.ModulePanel)) do
     if display == nil and module:getType().name == "MicroDisplayModule" then
       print("Counter Display Identified")
       display = module
-      display.setText("Hi!")
+      display:setText("Hi!")
     end
 
     if module:getType().name == "MushroomPushbuttonModuleBig" then
@@ -38,7 +38,7 @@ while true do
   counter = counter + 1
   print("Counter:", counter)
   if display then
-    display.setText(counter)
+    display:setText(counter)
   end
   if counter > 10 then
     error("meep")
